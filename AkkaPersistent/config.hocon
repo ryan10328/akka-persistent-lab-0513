@@ -1,0 +1,28 @@
+﻿akka.persistence {
+        journal {
+            plugin = "akka.persistence.journal.mongodb"
+            mongodb {
+                class = "Akka.Persistence.MongoDb.Journal.MongoDbJournal, Akka.Persistence.MongoDb"
+                connection-string = "mongodb://localhost:27017/demo"
+                auto-initialize = on
+                plugin-dispatcher = "akka.actor.default-dispatcher"
+                collection = "EventJournal"
+                metadata-collection = "Metadata"
+                legacy-serialization = off
+            }
+        }
+    
+        snapshot-store {
+            plugin = "akka.persistence.snapshot-store.mongodb"
+            mongodb {
+                class = "Akka.Persistence.MongoDb.Snapshot.MongoDbSnapshotStore, Akka.Persistence.MongoDb"
+                connection-string = "mongodb://localhost:27017/demo"
+                auto-initialize = on
+                plugin-dispatcher = "akka.actor.default-dispatcher"
+                collection = "SnapshotStore"
+                legacy-serialization = off
+            }
+        }
+    }
+}
+

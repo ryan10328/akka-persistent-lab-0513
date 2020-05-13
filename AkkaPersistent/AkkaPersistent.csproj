@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Akka" Version="1.4.6" />
+      <PackageReference Include="Akka.Persistence" Version="1.4.6" />
+      <PackageReference Include="Akka.Persistence.MongoDb" Version="1.4.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="config.hocon">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="data.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    
+</Project>
