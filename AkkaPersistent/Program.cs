@@ -22,6 +22,10 @@ namespace AkkaPersistent
 
                 // fooActor.Tell(item.ToString(), ActorRefs.Nobody);
 
+                Console.WriteLine("Please enter to give a initialize number");
+                var val = Console.ReadLine();
+                fooActor.Tell(new SetCurrentNumber(int.Parse(val)), ActorRefs.Nobody);
+
                 while (true)
                 {
                     Console.WriteLine("Please press enter to send event to an actor");

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Akka.Actor;
 using Akka.Persistence;
-using Akka.Util.Internal;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
 
 namespace AkkaPersistent
 {
@@ -15,24 +13,38 @@ namespace AkkaPersistent
 
         public FooActor()
         {
+            Recover<SetCurrentNumber>(data => { _currentNumber += data.CurrentNumber; });
+
             Recover<int>(data =>
             {
-                Console.WriteLine($"Recover(currentNumber): {_currentNumber}");
                 _currentNumber += data;
+                Console.WriteLine($"Recover(_store): {JsonConvert.SerializeObject(_currentNumber)}");
             });
 
             Command<int>(data =>
                 Persist(data, s =>
                 {
-                    Console.WriteLine($"Command(currentNumber): {_currentNumber}");
                     _currentNumber += data;
+                    Console.WriteLine($"Command(_store): {JsonConvert.SerializeObject(_currentNumber)}");
                 })
             );
+
+            Command<SetCurrentNumber>(data => { Persist(data, x => { _currentNumber += data.CurrentNumber; }); });
         }
 
         public static Props Props()
         {
             return Akka.Actor.Props.Create(() => new FooActor());
         }
+    }
+
+    public class SetCurrentNumber
+    {
+        public SetCurrentNumber(int currentNumber)
+        {
+            CurrentNumber = currentNumber;
+        }
+
+        public int CurrentNumber { get; set; }
     }
 }
