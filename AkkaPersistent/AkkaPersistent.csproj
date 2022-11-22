@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Akka" Version="1.4.6" />
+      <PackageReference Include="Akka" Version="1.4.46" />
       <PackageReference Include="Akka.Persistence" Version="1.4.6" />
       <PackageReference Include="Akka.Persistence.MongoDb" Version="1.4.5" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
